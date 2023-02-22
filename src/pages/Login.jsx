@@ -19,7 +19,7 @@ function Login({ setIsAuth }) {
       <p className="font-bold text-xl">Sign In With Google to Continue</p>
       <button
         onClick={SignInWithGoogle}
-        className="flex shadow-lg mx-[85px] xl:mx-[170px] mt-4 font-medium px-2"
+        className="flex shadow-lg w-[70%] md:w-[50%] mx-auto mt-4 font-medium px-2"
       >
         <FcGoogle size={28} className="mr-3" />
         Sign In With Google

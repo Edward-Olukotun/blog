@@ -24,6 +24,7 @@ function Home({ isAuth }) {
   return (
     <div className="">
       {postList.map((post) => {
+        console.log(post.id);
         return (
           <div className="bg-gray-800 text-white shadow-lg md:w-[60%] mx-auto">
             <div className=" font-bold text-2xl py-3 justify-center flex">
