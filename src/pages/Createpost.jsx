@@ -25,7 +25,7 @@ function Createpost({ isAuth }) {
 
   return (
     <div className="">
-      <div className="mt-10 w-[40%] mx-auto text-center bg-black text-white rounded-md">
+      <div className="mt-10 w-[80%] mx-auto text-center bg-black text-white rounded-md">
         <h1 className="font-bold text-xl my-3">create a post</h1>
         <div className=" mt-10 flex flex-col w-[80%] mx-auto text-start">
           <label htmlFor="Title">Title:</label>
