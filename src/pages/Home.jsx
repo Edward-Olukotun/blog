@@ -7,37 +7,41 @@ function Home({ isAuth }) {
   const [postList, setPostList] = useState([]);
   const postCollcetionRef = collection(db, "post");
 
-  const deletePost = async (id) => {
-    const postDoc = doc(db, "post", id);
-    await deleteDoc(postDoc);
+  const getPost = async () => {
+    const data = await getDocs(postCollcetionRef);
+    setPostList(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
   };
 
   useEffect(() => {
-    const getPost = async () => {
-      const data = await getDocs(postCollcetionRef);
-      setPostList(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-    };
-
     getPost();
-  });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div className="">
-      {postList.map((post) => {
-        console.log(post.id);
+      {postList.map((post, id) => {
+        console.log("post id text", post.id);
         return (
-          <div className="bg-gray-800 text-white shadow-lg md:w-[60%] mx-auto">
-            <div className=" font-bold text-2xl py-3 justify-center flex">
+          <div
+            className="bg-gray-800 text-white shadow-lg md:w-[60%] mx-auto pb-5"
+            key={id}
+          >
+            <div className=" font-bold text-2xl py-8 justify-center flex">
               <h1>{post.title}</h1>
               {isAuth ? (
                 <div className="ml-[20%] md:ml-[40%]">
-                  <button onClick={deletePost(post.id)}>
+                  <button
+                    onClick={async function () {
+                      await deleteDoc(doc(db, "post", post.id));
+                      window.location.reload();
+                    }}
+                  >
                     <FaRegTrashAlt size={28} />
                   </button>
                 </div>
               ) : null}
             </div>
-            <div className="text-lg md:w-[80%] mx-auto bg-gray-300">
+            <div className="text-lg md:w-[80%] mx-auto bg-gray-300 bt-4">
               <div className="  overscroll-contain text-black">
                 {post.postText}
               </div>
